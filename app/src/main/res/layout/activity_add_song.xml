@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    tools:context="com.example.artisja.kpopsuggestion.AddSongActivity">
+
+    <com.example.artisja.kpopsuggestion.InputRow
+        android:id="@+id/name_row"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <com.example.artisja.kpopsuggestion.InputRow
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/artist_row"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <com.example.artisja.kpopsuggestion.InputRow
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/album_row"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <com.example.artisja.kpopsuggestion.InputRow
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/url_row"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <Button android:id="@+id/submit_song"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_gravity="right"
+        />
+</LinearLayout>

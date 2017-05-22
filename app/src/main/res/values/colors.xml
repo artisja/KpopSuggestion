@@ -6,4 +6,6 @@
     <color name="colorWhite">#FFF</color>
     <color name="colorAccent">#b060d9</color>
     <color name="colorLightAccent">#d6acec</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
