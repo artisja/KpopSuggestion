@@ -12,33 +12,53 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
     <com.example.artisja.kpopsuggestion.InputRow
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/artist_row"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
     <com.example.artisja.kpopsuggestion.InputRow
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/album_row"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
     <com.example.artisja.kpopsuggestion.InputRow
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/url_row"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
     <Button android:id="@+id/submit_song"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:background="@color/colorAccent"
-        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
         android:layout_gravity="right"
         />
 </LinearLayout>

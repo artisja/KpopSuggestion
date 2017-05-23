@@ -2,6 +2,7 @@ package com.example.artisja.kpopsuggestion;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,6 +17,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import co.mobiwise.materialintro.shape.Focus;
+import co.mobiwise.materialintro.shape.FocusGravity;
+import co.mobiwise.materialintro.shape.ShapeType;
+import co.mobiwise.materialintro.view.MaterialIntroView;
 
 public class HomeActivity extends AppCompatActivity {
 

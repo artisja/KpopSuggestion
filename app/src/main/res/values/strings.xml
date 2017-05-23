@@ -4,6 +4,7 @@
     <string name="action_settings">Settings</string>
     <string name="name_label">Name of Artist: </string>
     <string name="title_activity_add_song">AddSongActivity</string>
+    <string name="add_song_prompt">Once you enter in all information before tapping this button make sure all urls work and are correct</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
