@@ -1,12 +1,19 @@
 package com.example.artisja.kpopsuggestion;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.security.SecureRandom;
 
 import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.shape.FocusGravity;
@@ -19,20 +26,20 @@ public class AddSongActivity extends AppCompatActivity {
     InputRow nameRow,artistRow,albumRow,urlRow;
     Button submitButton;
     private static final String SHOWCASE_ID = "995";
-
+    public DatabaseReference firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_song);
+        setUpDatabase();
         setUpViews();
         Double testIDs = Math.random()*100;
         int color = Color.argb(96,1751,47,173);
         new MaterialIntroView.Builder(this)
                 .enableDotAnimation(false)
                 .enableIcon(false)
-                .setMaskColor(color)
-                .dismissOnTouch(true)
+                .setMaskColor(color).dismissOnTouch(true)
                 .enableFadeAnimation(true)
                 .setFocusGravity(FocusGravity.CENTER)
                 .setFocusType(Focus.NORMAL)
@@ -42,6 +49,11 @@ public class AddSongActivity extends AppCompatActivity {
                 .setUsageId(String.valueOf(testIDs))
                 .performClick(true)
                 .show();
+
+    }
+
+    private void setUpDatabase() {
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
     }
 
@@ -59,11 +71,17 @@ public class AddSongActivity extends AppCompatActivity {
         urlRow.setLabel("Url Link: ");
         urlRow.setHint("URL");
         submitButton = (Button) findViewById(R.id.submit_song);
+        final Intent intent = new Intent(this,HomeActivity.class);
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(AddSongActivity.this, "Add to Google Firebase", Toast.LENGTH_SHORT).show();
+                SecureRandom secureRandom = new SecureRandom();
+                int id = secureRandom.nextInt();
+                SongInfo song = new SongInfo(nameRow.getInputEdit(),artistRow.getInputEdit(),albumRow.getInputEdit(),urlRow.getInputEdit());
+                firebaseDatabase.child(String.valueOf(id)).setValue(song);
+                startActivity(intent);
+                Toast.makeText(AddSongActivity.this, "Added to Google Firebase", Toast.LENGTH_SHORT).show();
 
             }
         });

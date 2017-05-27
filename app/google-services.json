@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "658243705717",
+    "firebase_url": "https://kpopsuggestionapp.firebaseio.com",
+    "project_id": "kpopsuggestionapp",
+    "storage_bucket": "kpopsuggestionapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658243705717:android:d7ae3cb8bf17199c",
+        "android_client_info": {
+          "package_name": "com.kpopsuggestion.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658243705717-sacd9rjsjm085nrdcpfvs1qqi17o9pnd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBEf3AjU3LK8LBmEglr9cjpiUW_A4pvhY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658243705717:android:d7d35b61167db3d8",
+        "android_client_info": {
+          "package_name": "com.example.artisja.kpopsuggestion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658243705717-sacd9rjsjm085nrdcpfvs1qqi17o9pnd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBEf3AjU3LK8LBmEglr9cjpiUW_A4pvhY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

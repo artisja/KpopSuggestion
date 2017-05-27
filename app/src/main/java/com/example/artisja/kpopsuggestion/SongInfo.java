@@ -8,6 +8,10 @@ public class SongInfo {
 
     String song,artist,album, imageURL;
 
+    public SongInfo(){
+
+    }
+
     public SongInfo(String songName, String artistName, String albumName, String imageURLName){
         this.song = songName;
         this.artist = artistName;

@@ -34,10 +34,11 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.SongLi
         }
     }
 
-    private ArrayList<SongInfo> homeList;
+    public ArrayList<SongInfo> homeList;
 
     public HomeListAdapter(ArrayList<SongInfo> songs){
         homeList = songs;
+        homeList.size();
     }
 
     @Override

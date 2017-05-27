@@ -53,6 +53,10 @@ public class InputRow extends RelativeLayout{
         rowLabel.setText(label);
     }
 
+    public String getInputEdit() {
+        return inputEdit.getText().toString();
+    }
+
     public void setHint(String hint) {
         this.hint = hint;
         inputEdit.setHint(hint);
