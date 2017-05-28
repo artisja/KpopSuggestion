@@ -1,18 +1,24 @@
 package com.example.artisja.kpopsuggestion;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.security.SecureRandom;
 
 import co.mobiwise.materialintro.shape.Focus;
@@ -24,9 +30,11 @@ import co.mobiwise.materialintro.view.MaterialIntroView;
 public class AddSongActivity extends AppCompatActivity {
 
     InputRow nameRow,artistRow,albumRow,urlRow;
-    Button submitButton;
+    Button submitButton,imagePicker;
     private static final String SHOWCASE_ID = "995";
+    private static final Integer IMAGE_PICK = 12345;
     public DatabaseReference firebaseDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +78,17 @@ public class AddSongActivity extends AppCompatActivity {
         urlRow = (InputRow) findViewById(R.id.url_row);
         urlRow.setLabel("Url Link: ");
         urlRow.setHint("URL");
+
+        imagePicker = (Button) findViewById(R.id.image_picker_buton);
+        imagePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                getIntent.setType("image/*");
+                startActivityForResult(Intent.createChooser(getIntent,"Select Picture"), IMAGE_PICK);
+            }
+        });
+
         submitButton = (Button) findViewById(R.id.submit_song);
         final Intent intent = new Intent(this,HomeActivity.class);
 
@@ -85,5 +104,23 @@ public class AddSongActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == IMAGE_PICK && resultCode == RESULT_OK && data.getData() !=null){
+            Uri image = data.getData();
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),image);
+                ImageView imageView = (ImageView) findViewById(R.id.test_image);
+                imageView.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
