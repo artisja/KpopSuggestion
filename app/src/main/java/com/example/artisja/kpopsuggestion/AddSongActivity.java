@@ -11,8 +11,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,13 +41,16 @@ public class AddSongActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 111;
     InputRow nameRow,artistRow,albumRow,urlRow;
     Button submitButton,imagePicker;
-    private static final String SHOWCASE_ID = "995";
     private static final int IMAGE_PICK = 12345;
     public DatabaseReference firebaseDatabase;
     public Bitmap bitmap;
+    public LinearLayout imagePickerBlock;
     public FirebaseStorage firebaseStorage;
     public StorageReference storageReference;
     private Uri imagePath;
+    public ToggleButton imageSelectToggle;
+    public SongInfo song;
+    public String storageURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,7 @@ public class AddSongActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseStorage  = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReferenceFromUrl("gs://kpopsuggestionapp.appspot.com/");
+        song = new SongInfo();
     }
 
     private void setUpViews() {
@@ -89,8 +96,33 @@ public class AddSongActivity extends AppCompatActivity {
         urlRow = (InputRow) findViewById(R.id.url_row);
         urlRow.setLabel("Url Link: ");
         urlRow.setHint("URL");
+        imagePickerBlock = (LinearLayout) findViewById(R.id.local_image_block);
+        imagePickerBlock.setVisibility(View.GONE);
+
+
+        imageSelectToggle = (ToggleButton) findViewById(R.id.image_select_toggle);
+        imageSelectToggle.setTextOn("Image Picker");
+        imageSelectToggle.setTextOff("URL");
+        imageSelectToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    imagePickerBlock.setVisibility(View.VISIBLE);
+                    urlRow.setVisibility(View.GONE);
+                    song.setURL(false);
+                    Toast.makeText(AddSongActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+                }else {
+                    urlRow.setVisibility(View.VISIBLE);
+                    imagePickerBlock.setVisibility(View.GONE);
+                    song.setURL(true);
+                    Toast.makeText(AddSongActivity.this, "Unchecked", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         imagePicker = (Button) findViewById(R.id.image_picker_buton);
+
+
         imagePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +142,9 @@ public class AddSongActivity extends AppCompatActivity {
                 SecureRandom secureRandom = new SecureRandom();
                 int id = secureRandom.nextInt();
                 addToDatabase(id);
-                addToStorage(id);
+                if (!song.isURL()) {
+                    addToStorage(id);
+                }
                 startActivity(intent);
 
             }
@@ -118,7 +152,7 @@ public class AddSongActivity extends AppCompatActivity {
     }
 
     private void addToStorage(int id) {
-        StorageReference imageRef = storageReference.child( String.valueOf(id)+".jpg");
+        StorageReference imageRef = storageReference.child(storageURL);
         UploadTask uploadTask = imageRef.putFile(imagePath);
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -134,7 +168,15 @@ public class AddSongActivity extends AppCompatActivity {
     }
 
     private void addToDatabase(int id) {
-        SongInfo song = new SongInfo(nameRow.getInputEdit(),artistRow.getInputEdit(),albumRow.getInputEdit(),urlRow.getInputEdit());
+        song.setSong(nameRow.getInputEdit());
+        song.setArtist(artistRow.getInputEdit());
+        song.setAlbum(albumRow.getInputEdit());
+        if (song.isURL()) {
+            song.setImageURL(urlRow.getInputEdit());
+        }else {
+            storageURL = String.valueOf(id)+".jpg";
+            song.setImageURL(storageURL);
+        }
         firebaseDatabase.child(String.valueOf(id)).setValue(song);
         Toast.makeText(AddSongActivity.this, "Added to Google Firebase", Toast.LENGTH_SHORT).show();
     }
@@ -148,7 +190,7 @@ public class AddSongActivity extends AppCompatActivity {
                 imagePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imagePath);
-                ImageView imageView = (ImageView) findViewById(R.id.test_image);
+                ImageView imageView = (ImageView) findViewById(R.id.image_selected);
                 imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();

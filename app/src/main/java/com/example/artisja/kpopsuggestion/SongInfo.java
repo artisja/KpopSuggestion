@@ -7,6 +7,7 @@ package com.example.artisja.kpopsuggestion;
 public class SongInfo {
 
     String song,artist,album, imageURL;
+    boolean isURL;
 
     public SongInfo(){
 
@@ -35,6 +36,13 @@ public class SongInfo {
         return song;
     }
 
+    public boolean isURL() {
+        return isURL;
+    }
+
+    public void setURL(boolean URL) {
+        isURL = URL;
+    }
     public void setAlbum(String album) {
         this.album = album;
     }
@@ -50,4 +58,6 @@ public class SongInfo {
     public void setSong(String song) {
         this.song = song;
     }
+
+
 }

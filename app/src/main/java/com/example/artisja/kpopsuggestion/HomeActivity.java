@@ -48,8 +48,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         context = this.getApplicationContext();
-        //songInfo = new SongInfo("Sorry","Zion.T","OO",
-                //"http://images.kpopstarz.com/data/thumbs/full/503195/600/0/0/0/zion-ts-teaser-photo-for-album-oo-posted-in-his-instagram.jpg");
         songInfoArrayList = new ArrayList<SongInfo>();
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -59,7 +57,6 @@ public class HomeActivity extends AppCompatActivity {
                     SongInfo post = postSnapshot.getValue(SongInfo.class);
                     songInfoArrayList.add(post);
                 }
-                Toast.makeText(HomeActivity.this, String.valueOf(songInfoArrayList.size()), Toast.LENGTH_SHORT).show();
                 homeListAdapter = new HomeListAdapter(songInfoArrayList);
                 recyclerView.setAdapter(homeListAdapter);
             }
